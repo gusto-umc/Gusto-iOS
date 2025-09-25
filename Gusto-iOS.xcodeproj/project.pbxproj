@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A2E98622E82B53300B5768B /* ConfigView in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2E98612E82B53300B5768B /* ConfigView */; };
 		0A8BE9422E744E5500FFFDC5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BE9412E744E5000FFFDC5 /* .gitignore */; };
 		0A8BE94B2E7921FF00FFFDC5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */; };
 		0A8BE9622E79558200FFFDC5 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */; };
@@ -39,37 +38,14 @@
 		0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0A8BE9642E795B4A00FFFDC5 /* Exceptions for "Gusto-iOS" folder in "Gusto-iOS" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 0A8BE8F92E744D0000FFFDC5 /* Gusto-iOS */;
-		};
-		0A8BE9662E795B6D00FFFDC5 /* Exceptions for "Gusto-iOSTests" folder in "Gusto-iOSTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 0A8BE9062E744D0200FFFDC5 /* Gusto-iOSTests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0A8BE8FC2E744D0000FFFDC5 /* Gusto-iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				0A8BE9642E795B4A00FFFDC5 /* Exceptions for "Gusto-iOS" folder in "Gusto-iOS" target */,
-			);
 			path = "Gusto-iOS";
 			sourceTree = "<group>";
 		};
 		0A8BE90A2E744D0200FFFDC5 /* Gusto-iOSTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				0A8BE9662E795B6D00FFFDC5 /* Exceptions for "Gusto-iOSTests" folder in "Gusto-iOSTests" target */,
-			);
 			path = "Gusto-iOSTests";
 			sourceTree = "<group>";
 		};
@@ -86,7 +62,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A8BE94B2E7921FF00FFFDC5 /* ComposableArchitecture in Frameworks */,
-				0A2E98622E82B53300B5768B /* ConfigView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,7 +126,6 @@
 			name = "Gusto-iOS";
 			packageProductDependencies = (
 				0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */,
-				0A2E98612E82B53300B5768B /* ConfigView */,
 			);
 			productName = "Gusto-iOS";
 			productReference = 0A8BE8FA2E744D0000FFFDC5 /* Gusto-iOS.app */;
@@ -656,10 +630,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A2E98612E82B53300B5768B /* ConfigView */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ConfigView;
-		};
 		0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0A8BE9492E7921FF00FFFDC5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
