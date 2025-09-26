@@ -38,14 +38,37 @@
 		0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0A2EB8342E86F91800B5768B /* Exceptions for "Gusto-iOS" folder in "Gusto-iOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 0A8BE8F92E744D0000FFFDC5 /* Gusto-iOS */;
+		};
+		0A2EB8352E86F91B00B5768B /* Exceptions for "Gusto-iOSTests" folder in "Gusto-iOSTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 0A8BE9062E744D0200FFFDC5 /* Gusto-iOSTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0A8BE8FC2E744D0000FFFDC5 /* Gusto-iOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0A2EB8342E86F91800B5768B /* Exceptions for "Gusto-iOS" folder in "Gusto-iOS" target */,
+			);
 			path = "Gusto-iOS";
 			sourceTree = "<group>";
 		};
 		0A8BE90A2E744D0200FFFDC5 /* Gusto-iOSTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0A2EB8352E86F91B00B5768B /* Exceptions for "Gusto-iOSTests" folder in "Gusto-iOSTests" target */,
+			);
 			path = "Gusto-iOSTests";
 			sourceTree = "<group>";
 		};
