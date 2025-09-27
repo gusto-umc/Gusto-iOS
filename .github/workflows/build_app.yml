@@ -1,0 +1,47 @@
+name: Build App
+
+on:
+  push:
+    branches: []
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: '16.4'
+        
+    - name: Create xcconfig files
+      run: |
+        # Debug.xcconfig 생성
+        touch Debug.xcconfig
+        
+        # Release.xcconfig 생성
+        touch Release.xcconfig
+        
+        echo "✅ xcconfig files created"
+        
+    - name: Build project
+      run: |
+        # .xcodeproj 파일 찾기
+      
+        PROJECT=$(find . -maxdepth 2 -name "*.xcodeproj")
+        SCHEME=$(basename "$PROJECT" .xcodeproj)
+      
+        echo "Found Project: $PROJECT"
+        echo "Found Scheme: $SCHEME"
+      
+        xcodebuild -project "$PROJECT" \
+          -scheme "$SCHEME" \
+          -configuration Debug \
+          -skipMacroValidation \
+          -destination "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.4" \
+          clean build
