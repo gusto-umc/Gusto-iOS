@@ -172,10 +172,10 @@ struct TMPonboardingView: View {
 struct Tab1Feature {
   @ObservableState
   struct State {
-    var path = StackState<Path.State>()
+    var path = StackState<Path.Tab1.State>()
   }
   enum Action {
-    case path(StackActionOf<Path>)
+    case path(StackActionOf<Path.Tab1>)
     case delegate(Delegate)
     enum Delegate {
       case deepLink(String)
@@ -196,15 +196,20 @@ struct Tab1Feature {
  하나의 feature로 만든다면 Feature.State를 관리해야하는 TCA특성상 enum Path에 모든 피쳐를 선언해줘야합니다.
  탭별로 관리한다면 그 탭에서 사용되는 feature만 넣어주면 됩니다. 대신 관리를 별도로 탭에서 해야합니다.
  */
-extension Tab1Feature {
+
+@Reducer
+enum Path {
+  case home
+  case onboarding
+}
+extension Path {
   @Reducer
-  enum Path {
+  enum Tab1 {
     case one(OneFeature)
     case two(TwoFeature)
     case three(ThreeFeature)
   }
 }
-
 
 struct Tab1View: View {
   @Bindable var store: StoreOf<Tab1Feature>
