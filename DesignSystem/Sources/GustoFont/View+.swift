@@ -11,7 +11,7 @@ public extension View {
   }
 }
 
-public enum Pretendard: Int {
+public enum Pretendard: Int, CaseIterable {
   case black = 900
   case extraBold = 800
   case bold = 700
@@ -25,7 +25,13 @@ public enum Pretendard: Int {
   var value: String {
     switch self {
     default:
-      return "Pretendard-\(self)"
+      return "Pretendard-\(self.displayName)"
     }
+  }
+  
+  private var displayName: String {
+    let name = String(describing: self)
+    // lowerCamelCase → UpperCamelCase 변환
+    return name.prefix(1).uppercased() + name.dropFirst()
   }
 }
