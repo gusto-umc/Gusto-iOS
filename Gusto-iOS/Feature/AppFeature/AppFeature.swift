@@ -10,6 +10,7 @@ enum Tab: String, Equatable, CaseIterable {
   case my
 }
 
+public enum Path {}
 @Reducer
 struct AppFeature {
   @ObservableState
@@ -176,6 +177,7 @@ struct Tab1Feature {
   }
   enum Action {
     case path(StackActionOf<Path.Tab1>)
+    case append(Path.Tab1.State)
     case delegate(Delegate)
     enum Delegate {
       case deepLink(String)
@@ -184,6 +186,9 @@ struct Tab1Feature {
   var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
+      case .append(let nextState):
+        state.path.append(nextState)
+        return .none
       default:
         return .none
       }
@@ -191,33 +196,58 @@ struct Tab1Feature {
     .forEach(\.path, action: \.path)
   }
 }
-/*
- !!!: 네비게이션을 탭별로 둘 것인지 하나의 네비게이션 feature를 만들어서 사용할 것인지
- 하나의 feature로 만든다면 Feature.State를 관리해야하는 TCA특성상 enum Path에 모든 피쳐를 선언해줘야합니다.
- 탭별로 관리한다면 그 탭에서 사용되는 feature만 넣어주면 됩니다. 대신 관리를 별도로 탭에서 해야합니다.
- */
 
-@Reducer
-enum Path {
-  case home
-  case onboarding
+ // !!!: destination관리하는 Path를 전역으로 둘 것인지 tab별로 별도관리할 것인지
+//전역관리
+extension Path {
+  @Reducer
+  enum Onboarding {
+    case onboarding(TMPonboardingFeature)
+  }
 }
 extension Path {
   @Reducer
   enum Tab1 {
     case one(OneFeature)
     case two(TwoFeature)
-    case three(ThreeFeature)
+    //...
+  }
+}
+
+//탭 별로 관리한다면 각 탭의 루트뷰에서 별도로 Path 관리
+struct Tab4RootView: View {
+  @Bindable var store: StoreOf<Tab1Feature>
+  var body: some View {
+    NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+      
+    } destination: { store in
+      switch store.case {
+      case .one(let store):
+        oneview(store: store)
+      default: EmptyView()
+      }
+    }
+  }
+  
+  @Reducer
+  enum Path {
+    case one(OneFeature)
+    case two(TwoFeature)
   }
 }
 
 struct Tab1View: View {
   @Bindable var store: StoreOf<Tab1Feature>
+  struct Constant {
+    var leftInRectanglePadding: CGFloat = 32
+    var Fonasdt: Font = .body
+  }
   
   var body: some View {
     NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
       Button("1") {
-        store.send(.delegate(.deepLink("2/3(name)")))
+//        store.send(.delegate(.deepLink("2번탭/3화면(name)")))
+        store.send(.append(.one(OneFeature.State(text: "1234"))))
       }
     } destination: { store in
       switch store.case {
@@ -235,22 +265,7 @@ struct Tab1View: View {
   }))
 }
 
-
-
-
-
-
-
-
-struct oneview: View {
-  let store: StoreOf<OneFeature>
-  
-  var body: some View {
-    Text("1")
-  }
-}
-@Reducer
-struct Tab2Feature {
+@Reducer struct Tab2Feature {
   struct State {}
   enum Action {
     case delegate(Delegate)
@@ -267,39 +282,82 @@ struct Tab2Feature {
     }
   }
 }
-
-
-@Reducer
-struct OneFeature {
+@Reducer struct OneFeature {
   @ObservableState
+  struct State {
+    var text: String
+  }
+  enum Action {
+    case asdf
+  }
+  var body: some ReducerOf<Self> {
+    Reduce { state, action in
+      switch action {
+      default:
+        return .none
+      }
+    }
+  }
+}
+@Reducer struct TwoFeature {
   struct State {}
   enum Action {}
   var body: some ReducerOf<Self> {
     Reduce { state, action in
-      switch action {}
+      return .none
     }
   }
 }
 
-@Reducer
-struct TwoFeature {
-  struct State {}
-  enum Action {}
-  var body: some ReducerOf<Self> {
-    Reduce { state, action in
-      switch action {}
+struct oneview: View {
+  let store: StoreOf<OneFeature>
+  
+  var body: some View {
+    Text(store.text)
+  }
+}
+
+// MARK: - ViewDestination의 중앙 처리
+
+struct CentralDestinationRouter<PathState, PathAction>: View {
+  let pathStore: Store<PathState, PathAction>
+  @Dependency(\.log) var logger
+  var body: some View {
+    //모든 destination 이곳에 선언
+    //런타임 캐스팅이 필요(중요포인트: 컴파일 에러가 아님)
+    if let tab1Store = pathStore as? StoreOf<Path.Tab1> {
+      switch tab1Store.case {
+      case .one(let oneFeature):
+        oneview(store: oneFeature)
+      default:
+        logger.log("tab1Store default", category: .warning)
+        EmptyView()
+      }
+    } else {
+      logger.log("타입 변환 실패", category: .warning)
+      EmptyView()
     }
   }
 }
 
-@Reducer
-struct ThreeFeature {
-  struct State {}
-  enum Action {}
-  var body: some ReducerOf<Self> {
-    Reduce { state, action in
-      switch action {}
+struct Tab1CenteralizeView: View {
+  @Bindable var store: StoreOf<Tab1Feature>
+  
+  var body: some View {
+    NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+      Button {
+        store.send(.append(.one(OneFeature.State(text: "5252"))))
+      } label: {
+        Text("1")
+      }
+    } destination: { nextStore in
+      CentralDestinationRouter(pathStore: nextStore)
     }
   }
 }
 
+#Preview("central") {
+  Tab1CenteralizeView(store: Store(initialState: Tab1Feature.State(), reducer: {
+    Tab1Feature()
+  }))
+}
