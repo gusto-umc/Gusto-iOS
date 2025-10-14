@@ -330,11 +330,11 @@ struct CentralDestinationRouter<PathState, PathAction>: View {
       case .one(let oneFeature):
         oneview(store: oneFeature)
       default:
-        logger.log("tab1Store default", category: .warning)
+        let _ = logger.log("tab1Store default", category: .warning)
         EmptyView()
       }
     } else {
-      logger.log("타입 변환 실패", category: .warning)
+      let _ = logger.log("타입 변환 실패", category: .warning)
       EmptyView()
     }
   }
