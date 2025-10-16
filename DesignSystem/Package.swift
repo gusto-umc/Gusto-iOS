@@ -11,7 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "GustoDesign",
-            targets: ["GustoFont"]
+            targets: ["GustoFont", "GustoComponent"]
         ),
     ],
     targets: [
@@ -19,6 +19,12 @@ let package = Package(
             name: "GustoFont",
             resources: [
                 .process("Font")
+            ]
+        ),
+        .target(
+            name: "GustoComponent",
+            dependencies: [
+              .target(name: "GustoFont")
             ]
         ),
     ]
