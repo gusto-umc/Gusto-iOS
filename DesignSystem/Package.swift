@@ -5,15 +5,21 @@ import PackageDescription
 
 let package = Package(
     name: "DesignSystem",
+    platforms: [
+        .iOS(.v18)
+    ],
     products: [
         .library(
-            name: "DesignSystem",
-            targets: ["GustoDesign"]
+            name: "GustoDesign",
+            targets: ["GustoFont"]
         ),
     ],
     targets: [
         .target(
-            name: "GustoDesign"
+            name: "GustoFont",
+            resources: [
+                .process("Font")
+            ]
         ),
     ]
 )
