@@ -36,6 +36,7 @@
 		0A8BE9412E744E5000FFFDC5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0A8BE9472E744F8E00FFFDC5 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		B5D9467C2EA09D7E00B73D2B /* Map */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Map; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -108,6 +109,7 @@
 		0A8BE8F12E744D0000FFFDC5 = {
 			isa = PBXGroup;
 			children = (
+				B5D9467C2EA09D7E00B73D2B /* Map */,
 				0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */,
 				0A8BE9472E744F8E00FFFDC5 /* Release.xcconfig */,
 				0A8BE9412E744E5000FFFDC5 /* .gitignore */,
