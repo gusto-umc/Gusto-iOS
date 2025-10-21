@@ -9,10 +9,12 @@ import SwiftUI
 import ComposableArchitecture
 import KakaoMapsSDK
 
-struct MapView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+public struct MapView: View {
+  public var body: some View {
+    GustoMapRepresentable()
+  }
+  
+  public init() {}
 }
 
 #Preview {
