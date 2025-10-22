@@ -1,10 +1,12 @@
 import SwiftUI
 import KakaoMapsSDK
 import MapFeature
+import GustoFont
 
 @main
 struct Gusto_iOSApp: App {
   init() {
+    FontManager.registerAllFonts()
     SDKInitializer.InitSDK(appKey: Gusto_iOSApp.kakaoMapNativeKey)
   }
   var body: some Scene {
