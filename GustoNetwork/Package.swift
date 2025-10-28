@@ -1,4 +1,5 @@
 // swift-tools-version: 6.1
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 import PackageDescription
 
 let package = Package(
@@ -8,20 +9,20 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "Network",
-      targets: ["Network"]
+      name: "GustoNetwork",
+      targets: ["GustoNetwork"]
     ),
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.10.0"),
-    .package(path: "../Core")
+    .package(path: "../GustoCore")
   ],
   targets: [
     .target(
-      name: "Network",
+      name: "GustoNetwork",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
-        .product(name: "Core", package: "Core")
+        .product(name: "GustoCore", package: "GustoCore")
       ]
     ),
     
