@@ -1,5 +1,5 @@
 import Foundation
-import GustoCore
+import GustoLogger
 
 public protocol NetworkProtocol { }
 

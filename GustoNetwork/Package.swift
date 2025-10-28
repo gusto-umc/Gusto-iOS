@@ -22,7 +22,7 @@ let package = Package(
       name: "GustoNetwork",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
-        .product(name: "GustoCore", package: "GustoCore")
+        .product(name: "GustoLogger", package: "GustoCore")
       ]
     ),
     

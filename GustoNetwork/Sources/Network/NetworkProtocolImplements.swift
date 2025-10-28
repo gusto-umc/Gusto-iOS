@@ -1,6 +1,6 @@
 import Foundation
 import Dependencies
-import GustoCore
+import GustoLogger
 public class VoidNetworkImpl: NetworkProtocol {
   @Dependency(\.log) var log
   private let session: URLSession
