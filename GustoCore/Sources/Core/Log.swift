@@ -8,8 +8,6 @@ public final class LogManager: Sendable {
     case info = "ℹ️"
     case warning = "⚠️"
     case error = "❌"
-    case cache = "💻"
-    case network = "🌐"
     
     func emoji() -> String {
       rawValue
@@ -31,10 +29,6 @@ public final class LogManager: Sendable {
       logger.warning("\(category.emoji()) \(str))")
     case .error:
       logger.error("\(category.emoji()) \(str))")
-    case .cache:
-      logger.info("\(category.emoji()) \(str))")
-    case .network:
-      logger.info("\(category.emoji()) \(str))")
     }
   }
 }
