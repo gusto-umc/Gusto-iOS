@@ -7,8 +7,3 @@ public protocol Requestable {
   var parameters: [String: Any]? { get }
   var body: Data? { get }
 }
-public protocol RetryRequestable: Requestable {
-  var retry: Int { get set }
-  var delay: Duration { get set }
-}
-
