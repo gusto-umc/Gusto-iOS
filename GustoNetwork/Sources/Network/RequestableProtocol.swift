@@ -9,18 +9,14 @@ public protocol Requestable {
 }
 
 extension Requestable {
-  private var baseURL: String? {
+  private var baseURL: String {
     guard let url = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String else {
-      return nil
+      fatalError("BASE_URL is not set in Info.plist")
     }
     return url
   }
   
   public func makeRequest() throws -> URLRequest {
-    guard let baseURL = baseURL else {
-      LogManager().log("cannot find base url", category: .error)
-      throw NetworkError.invalidURL
-    }
     guard let url = URL(string: baseURL + self.path) else {
       LogManager().log("cannot make URL", category: .error)
       throw NetworkError.invalidURL
