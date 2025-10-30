@@ -3,5 +3,6 @@ import GustoLogger
 
 public protocol NetworkProtocol {
   associatedtype T
-  var request: @Sendable (Requestable) async throws -> T { get }
+  var request: @Sendable (URLSession, Requestable) async throws -> T { get }
+  var session: URLSession { get }
 }
