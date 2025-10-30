@@ -1,5 +1,4 @@
 import Foundation
-import GustoLogger
 
 public protocol NetworkProtocol {
   associatedtype T

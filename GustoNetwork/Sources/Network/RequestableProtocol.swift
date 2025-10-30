@@ -1,5 +1,5 @@
 import Foundation
-import GustoLogger
+
 public protocol Requestable {
   var path: String { get }
   var method: HTTPMethod { get }
@@ -16,9 +16,8 @@ extension Requestable {
     return url
   }
   
-  public func makeRequest() throws -> URLRequest {
+  public func makeRequest() throws(NetworkError) -> URLRequest {
     guard let url = URL(string: baseURL + self.path) else {
-      LogManager().log("cannot make URL", category: .error)
       throw NetworkError.invalidURL
     }
     var urlRequest = URLRequest(url: URL(string: baseURL + self.path)!)
@@ -27,7 +26,6 @@ extension Requestable {
     
     if let parameters = self.parameters, self.method == .get {
       guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-        LogManager().log("initializing URLComponents was failed", category: .error)
         throw NetworkError.invalidURL
       }
       components.queryItems = parameters.map{ URLQueryItem(name: $0.key, value: "\($0.value)") }
@@ -39,7 +37,6 @@ extension Requestable {
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         return urlRequest
       } catch let error {
-        LogManager().log("Coding HTTP Body was failed")
         throw NetworkError.decodingFailed(error)
       }
     } else if let body = self.body {
@@ -47,7 +44,6 @@ extension Requestable {
       urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
       return urlRequest
     } else {
-      LogManager().log("unknown request matching error", category: .error)
       throw NetworkError.unknown
     }
   }
