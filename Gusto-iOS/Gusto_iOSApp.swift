@@ -10,7 +10,7 @@ struct Gusto_iOSApp: App {
   
   var body: some Scene {
     WindowGroup {
-      AppView(store: Store(initialState: AppFeature.State.onboarding(TMPonboardingFeature.State()), reducer: {
+      AppFeatureView(store: Store(initialState: AppFeature.State.tab(TabBarFeature.State()), reducer: {
         AppFeature()
       }))
     }
