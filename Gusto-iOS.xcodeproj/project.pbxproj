@@ -32,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A24E9662EB109B2006868C0 /* GustoCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GustoCore; sourceTree = "<group>"; };
+		0A24E9672EB109B2006868C0 /* GustoNetwork */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GustoNetwork; sourceTree = "<group>"; };
 		0A8BE8FA2E744D0000FFFDC5 /* Gusto-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gusto-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9072E744D0200FFFDC5 /* Gusto-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gusto-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9112E744D0200FFFDC5 /* Gusto-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gusto-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,8 @@
 				0A8BE9142E744D0200FFFDC5 /* Gusto-iOSUITests */,
 				B5D9475B2EA0EE7800B73D2B /* Frameworks */,
 				0A8BE8FB2E744D0000FFFDC5 /* Products */,
+				0A24E9662EB109B2006868C0 /* GustoCore */,
+				0A24E9672EB109B2006868C0 /* GustoNetwork */,
 			);
 			sourceTree = "<group>";
 		};
@@ -456,6 +460,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FHRYTR8NB9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Gusto-iOS/Info.plist";
@@ -493,6 +498,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FHRYTR8NB9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Gusto-iOS/Info.plist";
