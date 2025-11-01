@@ -9,16 +9,16 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "GustoCore",
-      targets: ["GustoCore"]
-    ),
+      name: "GustoLogger",
+      targets: ["GustoLogger"]
+    )
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.10.0"),
   ],
   targets: [
     .target(
-      name: "GustoCore",
+      name: "GustoLogger",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
       ]

@@ -13,17 +13,9 @@ let package = Package(
       targets: ["GustoNetwork"]
     ),
   ],
-  dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.10.0"),
-    .package(path: "../GustoCore")
-  ],
   targets: [
     .target(
-      name: "GustoNetwork",
-      dependencies: [
-        .product(name: "Dependencies", package: "swift-dependencies"),
-        .product(name: "GustoCore", package: "GustoCore")
-      ]
+      name: "GustoNetwork"
     ),
     
   ]
