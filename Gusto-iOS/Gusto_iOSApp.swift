@@ -1,4 +1,5 @@
 import SwiftUI
+import ComposableArchitecture
 import GustoFont
 
 @main
@@ -9,7 +10,16 @@ struct Gusto_iOSApp: App {
   
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      AppFeatureView(store: Store(initialState: AppFeature.State.tab(TabBarFeature.State()), reducer: {
+        AppFeature()
+      }))
     }
   }
+}
+
+
+#Preview {
+  AppView(store: Store(initialState: AppFeature.State.onboarding(TMPonboardingFeature.State()), reducer: {
+    AppFeature()
+  }))
 }
