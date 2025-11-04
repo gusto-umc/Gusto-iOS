@@ -24,12 +24,15 @@ extension Requestable {
     urlRequest.httpMethod = self.method.rawValue
     self.headers?.forEach { urlRequest.addValue($1, forHTTPHeaderField: $0) }
     
-    if let parameters = self.parameters, self.method == .get {
-      guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-        throw NetworkError.invalidURL
+    if method == .get {
+      if let parameters = parameters {
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+          throw NetworkError.invalidURL
+        }
+        components.queryItems = parameters.map{ URLQueryItem(name: $0.key, value: "\($0.value)") }
+        urlRequest.url = components.url
+        return urlRequest
       }
-      components.queryItems = parameters.map{ URLQueryItem(name: $0.key, value: "\($0.value)") }
-      urlRequest.url = components.url
       return urlRequest
     } else if let parameters = self.parameters {
       do {
@@ -44,7 +47,7 @@ extension Requestable {
       urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
       return urlRequest
     } else {
-      return urlRequest
+      throw .unknown
     }
   }
 }
