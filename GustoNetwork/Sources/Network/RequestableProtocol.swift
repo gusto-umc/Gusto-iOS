@@ -44,7 +44,7 @@ extension Requestable {
       urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
       return urlRequest
     } else {
-      throw NetworkError.unknown
+      return urlRequest
     }
   }
 }
