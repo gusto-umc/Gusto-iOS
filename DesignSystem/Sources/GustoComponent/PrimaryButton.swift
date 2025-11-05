@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GustoResources
 
 public struct PrimaryButton: View {
   private let action: @MainActor () -> Void
@@ -36,7 +37,6 @@ public struct PrimaryButton: View {
 }
 
 public extension PrimaryButton {
-  // 컬러 추가 후 변경 예정
   struct Config {
     fileprivate let titleKey: String
     fileprivate let cornerRadius: CGFloat
@@ -51,7 +51,7 @@ public extension PrimaryButton {
       fontSize: CGFloat = 16,
       fontWeight: Font.Weight = .bold,
       titleColor: Color = .white,
-      backgroundColor: Color = .pink
+      backgroundColor: Color = .mainC
     ) {
       self.titleKey = title
       self.cornerRadius = cornerRadius

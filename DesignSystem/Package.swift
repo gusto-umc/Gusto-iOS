@@ -4,28 +4,38 @@
 import PackageDescription
 
 let package = Package(
-    name: "DesignSystem",
-    platforms: [
-        .iOS(.v18)
-    ],
-    products: [
-        .library(
-            name: "GustoDesign",
-            targets: ["GustoFont", "GustoComponent"]
-        ),
-    ],
-    targets: [
-        .target(
-            name: "GustoFont",
-            resources: [
-                .process("Font")
-            ]
-        ),
-        .target(
-            name: "GustoComponent",
-            dependencies: [
-              .target(name: "GustoFont")
-            ]
-        ),
-    ]
+  name: "DesignSystem",
+  platforms: [
+    .iOS(.v18)
+  ],
+  products: [
+    .library(
+      name: "GustoDesign",
+      targets: ["GustoResources", "GustoFont", "GustoComponent"]
+    ),
+  ],
+  targets: [
+    .target(
+      name: "GustoResources",
+      resources: [
+        .process("Resources")
+      ],
+      plugins: ["AssetContants"]
+    ),
+    .target(
+      name: "GustoFont",
+      resources: [
+        .process("Font")
+      ]
+    ),
+    .target(
+      name: "GustoComponent",
+      dependencies: [
+        .target(name: "GustoResources"),
+        .target(name: "GustoFont")
+      ]
+    ),
+    .executableTarget(name: "AssetContantsExec", path: "Plugins/AssetContantsExec"),
+    .plugin(name: "AssetContants", capability: .buildTool(), dependencies: ["AssetContantsExec"])
+  ]
 )
