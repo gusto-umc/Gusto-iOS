@@ -1,7 +1,7 @@
 import Foundation
 
-public struct NetworkProtocolImpl: NetworkProtocol, Sendable {
-  public var session: URLSession
+public final class NetworkProtocolImpl: NetworkClient {
+  public let session: URLSession
   
   public init(session: URLSession) {
     self.session = session
@@ -23,5 +23,3 @@ public struct NetworkProtocolImpl: NetworkProtocol, Sendable {
     return try JSONDecoder().decode(T.self, from: data)
   }
 }
-
-
