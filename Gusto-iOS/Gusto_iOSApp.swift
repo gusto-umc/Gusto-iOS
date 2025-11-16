@@ -16,10 +16,3 @@ struct Gusto_iOSApp: App {
     }
   }
 }
-
-
-#Preview {
-  AppView(store: Store(initialState: AppFeature.State.onboarding(TMPonboardingFeature.State()), reducer: {
-    AppFeature()
-  }))
-}
