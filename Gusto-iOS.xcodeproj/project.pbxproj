@@ -12,7 +12,6 @@
 		0A8BE9422E744E5500FFFDC5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BE9412E744E5000FFFDC5 /* .gitignore */; };
 		0A8BE94B2E7921FF00FFFDC5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */; };
 		0A8BE9622E79558200FFFDC5 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */; };
-		B54A7FB32E9E950F005EA4B2 /* DesignSystem in Resources */ = {isa = PBXBuildFile; fileRef = B54A7FB22E9E950F005EA4B2 /* DesignSystem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +34,13 @@
 /* Begin PBXFileReference section */
 		0A24E9662EB109B2006868C0 /* GustoCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GustoCore; sourceTree = "<group>"; };
 		0A24E9672EB109B2006868C0 /* GustoNetwork */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GustoNetwork; sourceTree = "<group>"; };
+		0A305F4C2EC9BE0400178814 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		0A8BE8FA2E744D0000FFFDC5 /* Gusto-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gusto-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9072E744D0200FFFDC5 /* Gusto-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gusto-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9112E744D0200FFFDC5 /* Gusto-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gusto-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9412E744E5000FFFDC5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0A8BE9472E744F8E00FFFDC5 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		B54A7FB22E9E950F005EA4B2 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -116,7 +115,7 @@
 		0A8BE8F12E744D0000FFFDC5 = {
 			isa = PBXGroup;
 			children = (
-				B54A7FB22E9E950F005EA4B2 /* DesignSystem */,
+				0A305F4C2EC9BE0400178814 /* DesignSystem */,
 				0A24E9662EB109B2006868C0 /* GustoCore */,
 				0A24E9672EB109B2006868C0 /* GustoNetwork */,
 				0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */,
@@ -125,7 +124,6 @@
 				0A8BE8FC2E744D0000FFFDC5 /* Gusto-iOS */,
 				0A8BE90A2E744D0200FFFDC5 /* Gusto-iOSTests */,
 				0A8BE9142E744D0200FFFDC5 /* Gusto-iOSUITests */,
-				B5D9475B2EA0EE7800B73D2B /* Frameworks */,
 				0A8BE8FB2E744D0000FFFDC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,13 +136,6 @@
 				0A8BE9112E744D0200FFFDC5 /* Gusto-iOSUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B5D9475B2EA0EE7800B73D2B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,7 +267,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54A7FB32E9E950F005EA4B2 /* DesignSystem in Resources */,
 				0A8BE9422E744E5500FFFDC5 /* .gitignore in Resources */,
 				0A8BE9622E79558200FFFDC5 /* Debug.xcconfig in Resources */,
 			);
