@@ -60,7 +60,7 @@ struct TabBarFeatureView: View {
                   width: Constants.Sizes.tabBarImageWidth,
                   height: Constants.Sizes.tabBarImageHeight
                 )
-              Text(tab.rawValue)
+              Text(tab.tabName)
                 .pretendard(Constants.Fonts.tabBarText.font, size: Constants.Fonts.tabBarText.size)
             }
             .foregroundStyle(store.selectedTab == tab ? Constants.Colors.tabBarSelectedColor : Constants.Colors.tabBarUnselectedColor)
