@@ -1,11 +1,33 @@
 import ComposableArchitecture
 import SwiftUI
+import GustoFont
+import GustoResources
 
 struct TabBarFeatureView: View {
   @Bindable var store: StoreOf<TabBarFeature>
-  
+  private enum Constants {
+    enum Paddings {
+      static let tabBarItemUpPadding: CGFloat = 11.79
+      static let tabBarItemDownPadding: CGFloat = 12.21
+      static let tabBarBetweenImageAndTextPadding: CGFloat = 4
+    }
+    enum Sizes {
+      static let tabBarHeight: CGFloat = 72
+      static let tabBarImageWidth: CGFloat = 32
+      static let tabBarImageHeight: CGFloat = 32
+    }
+    enum Colors {
+      static let tabBarShadow = Color.black1.opacity(0.1)
+      static let tabBarSelectedColor = Color.mainC
+      static let tabBarUnselectedColor = Color.grayNavi
+    }
+    @MainActor
+    enum Fonts {
+      static let tabBarText: (font: Pretendard, size: CGFloat) = (.black, 10)
+    }
+  }
   var body: some View {
-    ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+    ZStack(alignment: .bottom) {
       TabView(selection: $store.selectedTab.sending(\.selectedTab)) {
         Text("지도")
           .tag(Tab.map)
@@ -30,14 +52,27 @@ struct TabBarFeatureView: View {
           Button {
             store.send(.selectedTab(tab))
           } label: {
-            Text(tab.rawValue)
+            VStack(spacing: Constants.Paddings.tabBarBetweenImageAndTextPadding) {
+              Image(tab.iconName)
+                .renderingMode(.template)
+                .resizable()
+                .frame(
+                  width: Constants.Sizes.tabBarImageWidth,
+                  height: Constants.Sizes.tabBarImageHeight
+                )
+              Text(tab.rawValue)
+                .pretendard(Constants.Fonts.tabBarText.font, size: Constants.Fonts.tabBarText.size)
+            }
+            .foregroundStyle(store.selectedTab == tab ? Constants.Colors.tabBarSelectedColor : Constants.Colors.tabBarUnselectedColor)
           }
         }
         Spacer()
       }
-      .padding(.vertical, 10)
+      .padding(.top, Constants.Paddings.tabBarItemUpPadding)
+      .padding(.bottom, Constants.Paddings.tabBarItemDownPadding)
       .background {
-        Color.black
+        Color.white
+          .shadow(color: Constants.Colors.tabBarShadow, radius: 8, y: -4)
       }
     }
     .ignoresSafeArea(edges: [.bottom, .horizontal])
