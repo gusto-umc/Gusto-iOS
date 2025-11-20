@@ -11,6 +11,11 @@ public protocol Requestable {
 extension Requestable {
   private var baseURL: String {
     guard let url = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String else {
+      #if DEBUG
+      if let url = ProcessInfo.processInfo.environment["BASE_URL"] {
+        return url
+      }
+      #endif
       fatalError("BASE_URL is not set in Info.plist")
     }
     return url
