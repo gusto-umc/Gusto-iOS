@@ -5,27 +5,6 @@ import GustoResources
 
 struct TabBarFeatureView: View {
   @Bindable var store: StoreOf<TabBarFeature>
-  private enum Constants {
-    enum Paddings {
-      static let tabBarItemUpPadding: CGFloat = 11.79
-      static let tabBarItemDownPadding: CGFloat = 12.21
-      static let tabBarBetweenImageAndTextPadding: CGFloat = 4
-    }
-    enum Sizes {
-      static let tabBarHeight: CGFloat = 72
-      static let tabBarImageWidth: CGFloat = 32
-      static let tabBarImageHeight: CGFloat = 32
-    }
-    enum Colors {
-      static let tabBarShadow = Color.black1.opacity(0.1)
-      static let tabBarSelectedColor = Color.mainC
-      static let tabBarUnselectedColor = Color.grayNavi
-    }
-    @MainActor
-    enum Fonts {
-      static let tabBarText: (font: Pretendard, size: CGFloat) = (.black, 10)
-    }
-  }
   var body: some View {
     ZStack(alignment: .bottom) {
       TabView(selection: $store.selectedTab.sending(\.selectedTab)) {
@@ -79,6 +58,28 @@ struct TabBarFeatureView: View {
   }
 }
 
+extension TabBarFeatureView {
+  private enum Constants {
+    enum Paddings {
+      static let tabBarItemUpPadding: CGFloat = 12
+      static let tabBarItemDownPadding: CGFloat = 34
+      static let tabBarBetweenImageAndTextPadding: CGFloat = 4
+    }
+    enum Sizes {
+      static let tabBarImageWidth: CGFloat = 32
+      static let tabBarImageHeight: CGFloat = 32
+    }
+    enum Colors {
+      static let tabBarShadow = Color.black1.opacity(0.1)
+      static let tabBarSelectedColor = Color.mainC
+      static let tabBarUnselectedColor = Color.grayNavi
+    }
+    @MainActor
+    enum Fonts {
+      static let tabBarText: (font: Pretendard, size: CGFloat) = (.black, 10)
+    }
+  }
+}
 
 #Preview {
   TabBarFeatureView(store: Store(initialState: TabBarFeature.State(), reducer: {
