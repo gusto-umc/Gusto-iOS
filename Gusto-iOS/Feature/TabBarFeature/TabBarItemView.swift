@@ -40,7 +40,6 @@ extension TabBarItemView {
       static let tabBarSelectedColor = Color.mainC
       static let tabBarUnselectedColor = Color.grayNavi
     }
-    @MainActor
     struct Fonts {
       static let tabBarText: (font: Pretendard, size: CGFloat) = (.black, 10)
     }
