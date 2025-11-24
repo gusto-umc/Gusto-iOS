@@ -1,33 +1,35 @@
 import SwiftUI
+import ComposableArchitecture
 import GustoFont
 import GustoResources
 
-struct TabBarItemView: View {
-  let tab: Tab
-  let isSelected: Bool
-  let action: () -> Void
-  
-  var body: some View {
-    Button {
-      action()
-    } label: {
-      VStack(spacing: Constants.Paddings.tabBarBetweenImageAndTextPadding) {
-        Image(tab.iconName)
-          .renderingMode(.template)
-          .resizable()
-          .frame(
-            width: Constants.Sizes.tabBarImageWidth,
-            height: Constants.Sizes.tabBarImageHeight
-          )
-        Text(tab.tabName)
-          .pretendard(Constants.Fonts.tabBarText.font, size: Constants.Fonts.tabBarText.size)
+extension TabBarFeatureView {
+  struct TabBarItemView: View {
+    let store: StoreOf<TabBarFeature>
+    let tab: Tab
+    
+    var body: some View {
+      Button {
+        store.send(.selectedTab(tab))
+      } label: {
+        VStack(spacing: Constants.Paddings.tabBarBetweenImageAndTextPadding) {
+          Image(tab.iconName)
+            .renderingMode(.template)
+            .resizable()
+            .frame(
+              width: Constants.Sizes.tabBarImageWidth,
+              height: Constants.Sizes.tabBarImageHeight
+            )
+          Text(tab.tabName)
+            .pretendard(Constants.Fonts.tabBarText.font, size: Constants.Fonts.tabBarText.size)
+        }
+        .foregroundStyle(store.selectedTab == tab ? Constants.Colors.tabBarSelectedColor : Constants.Colors.tabBarUnselectedColor)
       }
-      .foregroundStyle(isSelected ? Constants.Colors.tabBarSelectedColor : Constants.Colors.tabBarUnselectedColor)
     }
   }
 }
 
-extension TabBarItemView {
+extension TabBarFeatureView.TabBarItemView {
   private enum Constants {
     enum Paddings {
       static let tabBarBetweenImageAndTextPadding: CGFloat = 4
@@ -49,13 +51,10 @@ extension TabBarItemView {
 #Preview {
   HStack {
     VStack {
-      ForEach(Tab.allCases, id: \.self) {
-        TabBarItemView(tab: $0, isSelected: false, action: {})
-      }
-    }
-    VStack {
-      ForEach(Tab.allCases, id: \.self) {
-        TabBarItemView(tab: $0, isSelected: true, action: {})
+      ForEach(Tab.allCases, id: \.self) { tab in
+        TabBarFeatureView.TabBarItemView(store: Store(initialState: .init(), reducer: {
+          TabBarFeature()
+        }), tab: tab)
       }
     }
   }
