@@ -6,7 +6,7 @@ struct TabBarFeatureView: View {
   
   var body: some View {
     ZStack(alignment: .bottom) {
-      TabView(selection: $store.selectedTab.sending(\.selectedTab)) {
+      TabView(selection: $store.selectedTab) {
         Text("지도")
           .tag(Tab.map)
           .toolbarVisibility(.hidden, for: .tabBar)
@@ -24,7 +24,7 @@ struct TabBarFeatureView: View {
           .toolbarVisibility(.hidden, for: .tabBar)
       }
       
-      TabBarView(selectedTab: $store.selectedTab.sending(\.selectedTab))
+      TabBarView(store: store)
     }
     .ignoresSafeArea(edges: [.bottom, .horizontal])
   }
