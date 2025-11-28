@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
-import KakaoMapsSDK
 
 public struct MapView: View {
   public var body: some View {
-    GustoMapRepresentable()
+    Text("Map")
   }
   
   public init() {}

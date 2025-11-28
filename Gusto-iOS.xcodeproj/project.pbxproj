@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A245D7C2EBE0600009215F7 /* GustoNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 0A245D7B2EBE0600009215F7 /* GustoNetwork */; };
+		0A245D7E2EBE0834009215F7 /* GustoDesign in Frameworks */ = {isa = PBXBuildFile; productRef = 0A245D7D2EBE0834009215F7 /* GustoDesign */; };
 		0A8BE9422E744E5500FFFDC5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BE9412E744E5000FFFDC5 /* .gitignore */; };
 		0A8BE94B2E7921FF00FFFDC5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */; };
 		0A8BE9622E79558200FFFDC5 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */; };
-		B54A7FB32E9E950F005EA4B2 /* DesignSystem in Resources */ = {isa = PBXBuildFile; fileRef = B54A7FB22E9E950F005EA4B2 /* DesignSystem */; };
-		B5D9475D2EA0EE7800B73D2B /* GustoDesign in Frameworks */ = {isa = PBXBuildFile; productRef = B5D9475C2EA0EE7800B73D2B /* GustoDesign */; };
-		B5D947CD2EA1C42700B73D2B /* MapFeature in Frameworks */ = {isa = PBXBuildFile; productRef = B5D947CC2EA1C42700B73D2B /* MapFeature */; };
+		B553EB7D2ED99780000724E4 /* MapFeature in Frameworks */ = {isa = PBXBuildFile; productRef = B5D947CC2EA1C42700B73D2B /* MapFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +33,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A24E9662EB109B2006868C0 /* GustoCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GustoCore; sourceTree = "<group>"; };
+		0A24E9672EB109B2006868C0 /* GustoNetwork */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GustoNetwork; sourceTree = "<group>"; };
+		0A305F4C2EC9BE0400178814 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		0A8BE8FA2E744D0000FFFDC5 /* Gusto-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gusto-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9072E744D0200FFFDC5 /* Gusto-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gusto-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9112E744D0200FFFDC5 /* Gusto-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gusto-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8BE9412E744E5000FFFDC5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0A8BE9472E744F8E00FFFDC5 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		B54A7FB22E9E950F005EA4B2 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 		B5D9467C2EA09D7E00B73D2B /* Map */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Map; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,9 +91,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5D947CD2EA1C42700B73D2B /* MapFeature in Frameworks */,
+				B553EB7D2ED99780000724E4 /* MapFeature in Frameworks */,
+				0A245D7E2EBE0834009215F7 /* GustoDesign in Frameworks */,
 				0A8BE94B2E7921FF00FFFDC5 /* ComposableArchitecture in Frameworks */,
-				B5D9475D2EA0EE7800B73D2B /* GustoDesign in Frameworks */,
+				0A245D7C2EBE0600009215F7 /* GustoNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +118,9 @@
 		0A8BE8F12E744D0000FFFDC5 = {
 			isa = PBXGroup;
 			children = (
-				B54A7FB22E9E950F005EA4B2 /* DesignSystem */,
+				0A305F4C2EC9BE0400178814 /* DesignSystem */,
+				0A24E9662EB109B2006868C0 /* GustoCore */,
+				0A24E9672EB109B2006868C0 /* GustoNetwork */,
 				B5D9467C2EA09D7E00B73D2B /* Map */,
 				0A8BE9612E79558200FFFDC5 /* Debug.xcconfig */,
 				0A8BE9472E744F8E00FFFDC5 /* Release.xcconfig */,
@@ -166,7 +171,8 @@
 			name = "Gusto-iOS";
 			packageProductDependencies = (
 				0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */,
-				B5D9475C2EA0EE7800B73D2B /* GustoDesign */,
+				0A245D7B2EBE0600009215F7 /* GustoNetwork */,
+				0A245D7D2EBE0834009215F7 /* GustoDesign */,
 				B5D947CC2EA1C42700B73D2B /* MapFeature */,
 			);
 			productName = "Gusto-iOS";
@@ -274,7 +280,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B54A7FB32E9E950F005EA4B2 /* DesignSystem in Resources */,
 				0A8BE9422E744E5500FFFDC5 /* .gitignore in Resources */,
 				0A8BE9622E79558200FFFDC5 /* Debug.xcconfig in Resources */,
 			);
@@ -461,6 +466,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FHRYTR8NB9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Gusto-iOS/Info.plist";
@@ -498,6 +504,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FHRYTR8NB9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Gusto-iOS/Info.plist";
@@ -673,15 +680,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A245D7B2EBE0600009215F7 /* GustoNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GustoNetwork;
+		};
+		0A245D7D2EBE0834009215F7 /* GustoDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GustoDesign;
+		};
 		0A8BE94A2E7921FF00FFFDC5 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0A8BE9492E7921FF00FFFDC5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		B5D9475C2EA0EE7800B73D2B /* GustoDesign */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GustoDesign;
-        };
 		B5D947CC2EA1C42700B73D2B /* MapFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MapFeature;

@@ -1,4 +1,5 @@
 import SwiftUI
+import ComposableArchitecture
 import KakaoMapsSDK
 import MapFeature
 import GustoFont
@@ -11,7 +12,9 @@ struct Gusto_iOSApp: App {
   }
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      AppFeatureView(store: Store(initialState: AppFeature.State.tab(TabBarFeature.State()), reducer: {
+        AppFeature()
+      }))
     }
   }
 }
@@ -19,7 +22,7 @@ struct Gusto_iOSApp: App {
 extension Gusto_iOSApp {
   static let kakaoMapNativeKey: String = {
     guard let url = Bundle.main.object(forInfoDictionaryKey: "kakaoMapNativeKey") as? String else {
-      LogManager().log("cannot find kakao native key", category: .error)
+      print("cannot find kakao native key")
       return ""
     }
     return url

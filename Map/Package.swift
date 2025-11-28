@@ -17,13 +17,15 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.2.2"),
     .package(url: "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM.git", from: "2.12.10"),
+    .package(path: "../DesignSystem"),
   ],
   targets: [
     .target(
       name: "MapFeature",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "KakaoMapsSDK-SPM", package: "KakaoMapsSDK-SPM")
+        .product(name: "KakaoMapsSDK-SPM", package: "KakaoMapsSDK-SPM"),
+        .product(name: "GustoDesign", package: "DesignSystem")
       ]
     ),
     .testTarget(
