@@ -11,12 +11,6 @@ public struct SearchTextField: View {
   @Binding var searchText: String
   private let config: Config
   
-  private var propt: Text {
-    Text(config.placeholder)
-      .foregroundStyle(.gray) // color 교체 예정 gray_3: #A6A6A6
-      .font(.system(size: 12))
-  }
-  
   public var body: some View {
     HStack {
       TextField(
@@ -47,6 +41,12 @@ public struct SearchTextField: View {
   public init(searchText: Binding<String>, config: Self.Config) {
     self._searchText = searchText
     self.config = config
+  }
+  
+  private var propt: Text {
+    Text(config.placeholder)
+      .foregroundStyle(Color.gray8)
+      .font(.system(size: 12))
   }
 }
 
