@@ -7,14 +7,12 @@
 import SwiftUI
 
 struct NicknameSettingView: View {
-    // MARK: - State
+    // MARK: model
     @State private var nickname: String = ""
     
-    // 시뮬레이션을 위한 가짜 상태 변수입니다.
-    // 실제 앱에서는 서버 통신 결과에 따라 이 값을 변경해야 합니다.
-    // 테스트 방법: "중복"이라고 입력하면 왼쪽 화면(중복)처럼 보이고, 그 외에는 오른쪽 화면(성공)처럼 보입니다.
+    
     var isNicknameTaken: Bool {
-        return nickname == "중복"
+        return nickname == "김철수"
     }
     
     var isValid: Bool {
