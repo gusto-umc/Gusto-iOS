@@ -12,7 +12,7 @@ public extension View {
   }
 }
 
-public enum Pretendard: Int, CaseIterable {
+public enum Pretendard: Int, CaseIterable, Sendable {
   case black = 900
   case extraBold = 800
   case bold = 700
