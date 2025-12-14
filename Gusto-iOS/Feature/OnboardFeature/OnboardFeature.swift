@@ -7,6 +7,7 @@
 import ComposableArchitecture
 
 
+// MARK: Feature
 @Reducer
 struct OnboardFeature {
     // MARK: state
@@ -21,7 +22,7 @@ struct OnboardFeature {
     }
     
     
-    // MARK: saction
+    // MARK: action
     enum Action {
         case path(StackActionOf<Path>)
     }

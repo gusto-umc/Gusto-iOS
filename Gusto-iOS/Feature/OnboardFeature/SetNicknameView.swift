@@ -9,7 +9,7 @@ import SwiftUI
 
 
 // MARK: View
-struct NicknameSettingView: View {
+struct SetNicknameView: View {
     // MARK: model
     @State private var nickname: String = ""
     var isNicknameTaken: Bool {
@@ -131,7 +131,7 @@ fileprivate struct NicknameTextField: View {
                     .font(.system(size: 16))
                     .padding(.horizontal, 16)
                     // 글자수 제한 로직
-                    .onChange(of: nickname) { newValue in
+                    .onChange(of: nickname, initial: false) { _, newValue in
                         if newValue.count > 13 {
                             nickname = String(newValue.prefix(13))
                         }
@@ -205,5 +205,5 @@ fileprivate let disabledTextColor = Color.gray
 
 // MARK: Preview
 #Preview {
-    NicknameSettingView()
+    SetNicknameView()
 }
