@@ -18,7 +18,9 @@ struct OnboardFeature {
     
     @Reducer
     enum Path {
-        
+        case setNickname(SetNicknameFeature)
+        case setAge(SetAgeFeature)
+        case setProfile(SetProfileFeature)
     }
     
     
@@ -31,5 +33,9 @@ struct OnboardFeature {
         Reduce { state, action in
             return .none
         }
+        .forEach(\.path, action: \.path)
     }
+    
+    
+    // MARK: value
 }
