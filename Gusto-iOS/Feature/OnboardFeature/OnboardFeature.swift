@@ -20,6 +20,7 @@ struct OnboardFeature {
     enum Path {
         case setNickname(SetNicknameFeature)
         case setAge(SetAgeFeature)
+        case setGender(SetGenderFeature)
         case setProfile(SetProfileFeature)
     }
     
