@@ -19,21 +19,20 @@ struct OnboardFeatureView: View {
 
     // MARK: body
     var body: some View {
-        OnboardLayout {
-            Spacer(minLength: 0)
+        OnboardLayout(store: store) {
+            Spacer()
+            Spacer()
 
             // 1. 로고
             OnboardLogo()
 
-            Spacer(minLength: 0)
+            Spacer()
 
             // 2. 섹션 타이틀
             SocialLoginSectionTitle(content: "SNS 계정으로 빠른 시작하기")
 
-            Spacer().frame(height: 28)
-
-            // 3. 소셜 로그인 버튼
-            SocialLoginButtonRow(
+            // 3. 로그인 버튼 그룹
+            LoginButtonGroup(
                 onTapKakao: {
                     // Kakao 버튼 클릭 액션
                     store.send(.startSignUp)
@@ -45,17 +44,10 @@ struct OnboardFeatureView: View {
                 onTapGoogle: {
                     // Google 버튼 클릭 액션
                     store.send(.startSignUp)
-                }
-            )
-
-            Spacer().frame(height: 56)
-
-            // 4. 로그인 없이 시작하기
-            ContinueWithoutLoginButton(
-                label: "또는 로그인 없이 시작하기",
-                action: {
+                },
+                onTapContinueWithoutLogin: {
                     // 로그인 없이 시작하기 버튼 액션
-                    
+                    store.send(.startSignUp)
                 }
             )
 
@@ -67,17 +59,31 @@ struct OnboardFeatureView: View {
 
 // MARK: Component
 fileprivate struct OnboardLayout<Content: View>: View {
+    @Bindable var store: StoreOf<OnboardFeature>
     @ViewBuilder let content: () -> Content
     
     var body: some View {
-        VStack(spacing: 0) {
-            content()
+        NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+            VStack {
+                content()
+            }
+                .padding(.horizontal, 24)
+                .padding(.top, 16)
+                .padding(.bottom, 24)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.systemBackground))
+        } destination: { store in
+            switch store.case {
+            case .setNickname(let store):
+                SetNicknameView(store: store)
+            case .setAge(let store):
+                SetAgeView(store: store)
+            case .setGender(let store):
+                SetGenderView(store: store)
+            case .setProfile(let store):
+                SetProfileView(store: store)
+            }
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 16)
-        .padding(.bottom, 24)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemBackground))
     }
 }
 
@@ -101,31 +107,47 @@ fileprivate struct SocialLoginSectionTitle: View {
     }
 }
 
-fileprivate struct SocialLoginButtonRow: View {
+fileprivate struct LoginButtonGroup: View {
     let onTapKakao: () -> Void
     let onTapNaver: () -> Void
     let onTapGoogle: () -> Void
+    let onTapContinueWithoutLogin: () -> Void
 
     var body: some View {
-        HStack(spacing: 26) {
-            SocialLoginIconButton(
-                imageName: "kakao_login_btn",
-                accessibilityLabel: "카카오로 시작하기",
-                action: onTapKakao
-            )
+        VStack(spacing: 0) {
+            HStack(spacing: 26) {
+                SocialLoginIconButton(
+                    imageName: "kakao_login_btn",
+                    accessibilityLabel: "카카오로 시작하기",
+                    action: onTapKakao
+                )
 
-            SocialLoginIconButton(
-                imageName: "naver_login_btn",
-                accessibilityLabel: "네이버로 시작하기",
-                action: onTapNaver
-            )
+                SocialLoginIconButton(
+                    imageName: "naver_login_btn",
+                    accessibilityLabel: "네이버로 시작하기",
+                    action: onTapNaver
+                )
 
-            SocialLoginIconButton(
-                imageName: "google_login_btn",
-                accessibilityLabel: "구글로 시작하기",
-                action: onTapGoogle
-            )
+                SocialLoginIconButton(
+                    imageName: "google_login_btn",
+                    accessibilityLabel: "구글로 시작하기",
+                    action: onTapGoogle
+                )
+            }
+
+            Spacer().frame(height: 56)
+
+            Button(action: onTapContinueWithoutLogin) {
+                Text("또는 로그인 없이 시작하기")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(.red)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 14)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("로그인 없이 시작하기")
         }
+        .padding(.top, 28)
     }
 }
 
@@ -143,23 +165,6 @@ fileprivate struct SocialLoginIconButton: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(accessibilityLabel)
-    }
-}
-
-fileprivate struct ContinueWithoutLoginButton: View {
-    let label: String
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text(label)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(.red)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 14)
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(label)
     }
 }
 

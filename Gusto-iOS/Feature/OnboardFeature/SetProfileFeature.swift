@@ -14,15 +14,19 @@ struct SetProfileFeature {
     // MARK: state
     @ObservableState
     struct State {
+        let userName: String
         let step: OnboardFeature.Step = .setProfile
         
-        var profileImageUrl: URL? = nil
+        var profileImage: Data? = nil
+        var isValid: Bool = false
     }
     
     
     // MARK: action
     enum Action {
-        case validateInpput
+        case setProfileImage(Data)
+        
+        case validateInput
         case submit
         
         case delegate(Delegate)
@@ -34,10 +38,24 @@ struct SetProfileFeature {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .validateInpput:
-                fatalError("구현 예정입니다.")
+            case .setProfileImage(let image):
+                state.profileImage = image
+                return .none
+            case .validateInput:
+                // mutate
+                if state.profileImage != nil {
+                    state.isValid = true
+                    return .none
+                } else {
+                    state.isValid = false
+                    return .none
+                }
             case .submit:
-                fatalError("구현 예정입니다.")
+                if state.isValid {
+                    return .send(.delegate(.finished))
+                } else {
+                    return .none
+                }
             case .delegate:
                 return .none
             }

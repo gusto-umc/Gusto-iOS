@@ -13,6 +13,7 @@ struct SetGenderFeature {
     // MARK: state
     @ObservableState
     struct State {
+        let userName: String
         let step: OnboardFeature.Step  = .setGender
         
         var genderInput: Gender = .선택하지않음
@@ -53,7 +54,11 @@ struct SetGenderFeature {
                 
                 return .none
             case .submit:
-                fatalError("구현 예정입니다.")
+                if state.isValid {
+                    return .send(.delegate(.finished))
+                } else {
+                    return .none
+                }
             case .delegate:
                 return .none
             }

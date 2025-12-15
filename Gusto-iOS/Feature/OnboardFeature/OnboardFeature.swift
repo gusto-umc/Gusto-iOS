@@ -5,15 +5,22 @@
 //  Created by 김민우 on 11/22/25.
 //
 import ComposableArchitecture
+import Foundation
+import OSLog
 
 
 // MARK: Feature
 @Reducer
 struct OnboardFeature {
+    // MARK: core
+    private let logger = Logger()
+    
+    
     // MARK: state
     @ObservableState
     struct State {
         var path = StackState<Path.State>()
+        var userName: String!
     }
     
     @Reducer
@@ -36,21 +43,19 @@ struct OnboardFeature {
         Reduce { state, action in
             switch action {
             case .startSignUp:
-                // mutate
-                if state.path.isEmpty == true {
-                    state.path.append(.setNickname(.init()))
-                    return .none
-                } else {
-                    return .none
-                }
-            case .path(.element(id: _ , action: .setNickname(.delegate(.finished)))):
-                state.path.append(.setAge(.init()))
+                state.path.append(.setNickname(.init()))
+                return .none
+                
+            case .path(.element(id: _ , action: .setNickname(.delegate(.finished(let userName))))):
+                state.userName = userName
+                
+                state.path.append(.setAge(.init(userName: userName)))
                 return .none
             case .path(.element(id: _ , action: .setAge(.delegate(.finished)))):
-                state.path.append(.setGender(.init()))
+                state.path.append(.setGender(.init(userName: state.userName)))
                 return .none
             case .path(.element(id: _ , action: .setGender(.delegate(.finished)))):
-                state.path.append(.setProfile(.init()))
+                state.path.append(.setProfile(.init(userName: state.userName)))
                 return .none
             default:
                 return .none

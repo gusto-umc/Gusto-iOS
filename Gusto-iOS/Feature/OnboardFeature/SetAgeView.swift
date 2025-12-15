@@ -13,33 +13,24 @@ import ComposableArchitecture
 // MARK: View
 struct SetAgeView: View {
     // MARK: model
-    @Bindable var store: StoreOf<SetAgeFeature> = Store(initialState: SetAgeFeature.State()) {
-        SetAgeFeature()
-    }
-
+    @Bindable var store: StoreOf<SetAgeFeature>
     
-    var onTapBack: (() -> Void)?
     @State private var isAgeDropdownOpen: Bool = false
 
     // MARK: body
     var body: some View {
         VStack(spacing: 0) {
-            // 1. 뒤로 가기 버튼
-            TopBackButtonBar {
-                print("뒤로 가기 버튼이 클릭되었습니다.")
-            }
-
             Spacer().frame(height: 30)
 
-            // 2. 단계 표시
+            // 1. 단계 표시
             StepIndicator(step: store.step)
 
-            // 3. 메인 타이틀
-            MainTitle(content: "____님의\n나이를 선택해주세요.")
+            // 2. 메인 타이틀
+            MainTitle(content: "\(store.userName)님의\n나이를 선택해주세요.")
 
             Spacer().frame(height: 50)
 
-            // 4. 나이 선택 필드
+            // 3. 나이 선택 필드
             AgePickerField(
                 store: store,
                 isOpen: $isAgeDropdownOpen,
@@ -52,7 +43,7 @@ struct SetAgeView: View {
 
             Spacer()
 
-            // 5. 하단 버튼
+            // 4. 하단 버튼
             SubmitButton(
                 label: "다음으로 넘어가기",
                 isValid: store.isValid,
@@ -62,7 +53,7 @@ struct SetAgeView: View {
                 }
             )
         }
-        .onAppear {
+        .task {
             store.send(.validateInput)
         }
     }
@@ -152,7 +143,6 @@ fileprivate struct AgePickerField: View {
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 56)
-                .background(Color.white)
             }
 
             // 드롭다운 리스트
@@ -185,8 +175,13 @@ fileprivate struct AgePickerField: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 8)
+                .fill(Color.white)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .padding(.horizontal, 24)
     }
 }
@@ -220,5 +215,9 @@ fileprivate let disabledColor = Color(red: 0.93, green: 0.93, blue: 0.93)
 
 // MARK: Preview
 #Preview {
-    SetAgeView()
+    SetAgeView(
+        store: Store(initialState: SetAgeFeature.State(userName: "김철수")) {
+            SetAgeFeature()
+        }
+    )
 }

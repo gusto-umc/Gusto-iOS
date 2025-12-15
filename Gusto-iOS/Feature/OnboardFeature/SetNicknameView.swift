@@ -13,32 +13,27 @@ import OSLog
 // MARK: View
 struct SetNicknameView: View {
     // MARK: model
-    @Bindable var store: StoreOf<SetNicknameFeature> = Store(initialState: SetNicknameFeature.State()) { SetNicknameFeature() }
+    @Bindable var store: StoreOf<SetNicknameFeature>
     
     
     // MARK: body
     var body: some View {
         VStack(spacing: 0) {
-            // 1. 뒤로 가기 버튼
-            TopBackButtonBar {
-                print("뒤로 가기")
-            }
-            
             Spacer().frame(height: 30)
             
-            // 2. 단계 표시
+            // 1. 단계 표시
             StepIndicator(
                 step: store.step
             )
             
-            // 3. 메인 타이틀
+            // 2. 메인 타이틀
             MainTitle(
                 content: "앱 내에서 사용하실\n닉네임을 설정해 주세요."
             )
             
             Spacer().frame(height: 50)
             
-            // 4. 닉네임 입력 필드
+            // 3. 닉네임 입력 필드
             NicknameTextField(
                 prompt: "용맹한 파스타 21",
                 store: store,
@@ -50,12 +45,12 @@ struct SetNicknameView: View {
             
             Spacer()
             
-            // 5. 하단 버튼
+            // 4. 하단 버튼
             SubmitButton(
                 label: "다음으로 넘어가기",
-                isValid: store.isNicknameValid,
+                isValid: store.isValid,
                 action: {
-                    print("다음으로 넘어가기")
+                    store.send(.submit)
                 })
         }
     }
@@ -132,7 +127,7 @@ fileprivate struct NicknameTextField: View {
                     }
                 
                 // 오른쪽 체크마크 (유효할 때만 표시)
-                if store.isNicknameValid {
+                if store.isValid {
                     Image(systemName: "checkmark")
                         .foregroundColor(pointColor)
                         .padding(.trailing, 16)
@@ -199,5 +194,7 @@ fileprivate let disabledTextColor = Color.gray
 
 // MARK: Preview
 #Preview {
-    SetNicknameView()
+    SetNicknameView(
+        store: Store(initialState: SetNicknameFeature.State()) { SetNicknameFeature() }
+    )
 }

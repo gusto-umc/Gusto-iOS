@@ -13,35 +13,25 @@ import ComposableArchitecture
 // MARK: View
 struct SetGenderView: View {
     // MARK: model
-    @Bindable var store: StoreOf<SetGenderFeature> = Store(initialState: SetGenderFeature.State()) {
-        SetGenderFeature()
-    }
+    @Bindable var store: StoreOf<SetGenderFeature>
 
-    /// 뒤로가기(상위 라우터/코디네이터가 처리)
-    var onTapBack: (() -> Void)?
-
-    // 드롭다운 확장 여부
     @State private var isGenderDropdownOpen: Bool = false
 
+    
     // MARK: body
     var body: some View {
         VStack(spacing: 0) {
-            // 1. 뒤로 가기 버튼
-            TopBackButtonBar {
-                onTapBack?()
-            }
-
             Spacer().frame(height: 30)
 
-            // 2. 단계 표시
+            // 1. 단계 표시
             StepIndicator(step: store.step)
 
-            // 3. 메인 타이틀
-            MainTitle(content: "____님의\n성별을 선택해주세요.")
+            // 2. 메인 타이틀
+            MainTitle(content: "\(store.userName)님의\n성별을 선택해주세요.")
 
             Spacer().frame(height: 50)
 
-            // 4. 성별 선택 필드
+            // 3. 성별 선택 필드
             GenderPickerField(
                 store: store,
                 isOpen: $isGenderDropdownOpen,
@@ -54,7 +44,7 @@ struct SetGenderView: View {
 
             Spacer()
 
-            // 5. 하단 버튼
+            // 4. 하단 버튼
             SubmitButton(
                 label: "완료하기",
                 isValid: store.isValid,
@@ -64,7 +54,7 @@ struct SetGenderView: View {
                 }
             )
         }
-        .onAppear {
+        .task {
             store.send(.validateInput)
         }
     }
@@ -154,41 +144,42 @@ fileprivate struct GenderPickerField: View {
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 56)
-                .background(Color.white)
             }
 
             // 드롭다운 리스트
             if isOpen {
                 Divider()
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(SetGenderFeature.Gender.ordered, id: \.self) { option in
-                            Button(action: {
-                                onChange(option)
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    isOpen = false
-                                }
-                            }) {
-                                HStack {
-                                    Text(option.rawValue)
-                                        .foregroundColor(store.genderInput == option ? pointColor : .gray)
-                                        .fontWeight(store.genderInput == option ? .bold : .regular)
-                                    Spacer()
-                                }
-                                .padding(.horizontal, 16)
-                                .frame(height: 50)
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(SetGenderFeature.Gender.ordered, id: \.self) { option in
+                        Button(action: {
+                            onChange(option)
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                isOpen = false
                             }
-                            Divider()
+                        }) {
+                            HStack {
+                                Text(option.rawValue)
+                                    .foregroundColor(store.genderInput == option ? pointColor : .gray)
+                                    .fontWeight(store.genderInput == option ? .bold : .regular)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 16)
+                            .frame(height: 50)
                         }
+                        Divider()
                     }
                 }
-                .frame(maxHeight: 260)
             }
         }
         .background(
             RoundedRectangle(cornerRadius: 8)
+                .fill(Color.white)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .padding(.horizontal, 24)
     }
 }
@@ -222,5 +213,9 @@ fileprivate let disabledColor = Color(red: 0.93, green: 0.93, blue: 0.93)
 
 // MARK: Preview
 #Preview {
-    SetGenderView()
+    SetGenderView(
+        store: Store(initialState: SetGenderFeature.State(userName: "김철수")) {
+            SetGenderFeature()
+        }
+    )
 }

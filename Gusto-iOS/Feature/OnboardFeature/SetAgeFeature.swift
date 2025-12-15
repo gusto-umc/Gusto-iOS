@@ -5,14 +5,20 @@
 //  Created by 김민우 on 12/14/25.
 //
 import ComposableArchitecture
+import OSLog
 
 
 // MARK: Feature
 @Reducer
 struct SetAgeFeature {
+    // MARK: core
+    private let logger = Logger()
+    
+    
     // MARK: state
     @ObservableState
     struct State {
+        let userName: String
         let step: OnboardFeature.Step = .setAge
         
         var ageInput: Age = ._20대
@@ -52,7 +58,12 @@ struct SetAgeFeature {
                 
                 return .none
             case .submit:
-                fatalError("구현 예정입니다.")
+                // mutate
+                if state.isValid {
+                    return  .send(.delegate(.finished))
+                } else {
+                    return  .none
+                }
             case .delegate:
                 return .none
             }
