@@ -22,7 +22,10 @@ struct SetGenderFeature {
     
     // MARK: action
     enum Action {
+        case setGender(Gender)
+        
         case validateInput
+        case submit
         
         case delegate(Delegate)
         enum Delegate {
@@ -33,6 +36,11 @@ struct SetGenderFeature {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case .setGender(let newGender):
+                // mutate
+                state.genderInput = newGender
+                return .none
+                
             case .validateInput:
                 // capture
                 let gender = state.genderInput
@@ -44,6 +52,8 @@ struct SetGenderFeature {
                 state.isValid = isValid
                 
                 return .none
+            case .submit:
+                fatalError("구현 예정입니다.")
             case .delegate:
                 return .none
             }
