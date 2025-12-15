@@ -27,11 +27,21 @@ struct OnboardFeature {
     // MARK: action
     enum Action {
         case path(StackActionOf<Path>)
+        
+        case startSignUp
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-            return .none
+            switch action {
+            case .startSignUp:
+                state.path.append(.setNickname(.init()))
+                
+                return .none
+            default:
+                
+                return .none
+            }
         }
         .forEach(\.path, action: \.path)
     }
