@@ -12,15 +12,14 @@ import ComposableArchitecture
 // MARK: View
 struct OnboardFeatureView: View {
     // MARK: model
-    var onTapKakao: (() -> Void)?
-    var onTapNaver: (() -> Void)?
-    var onTapGoogle: (() -> Void)?
-    var onTapContinueWithoutLogin: (() -> Void)?
+    let store: StoreOf<OnboardFeature> = .init(initialState: OnboardFeature.State()) {
+        OnboardFeature()
+    }
 
 
     // MARK: body
     var body: some View {
-        VStack(spacing: 0) {
+        OnboardLayout {
             Spacer(minLength: 0)
 
             // 1. 로고
@@ -35,9 +34,18 @@ struct OnboardFeatureView: View {
 
             // 3. 소셜 로그인 버튼
             SocialLoginButtonRow(
-                onTapKakao: { onTapKakao?() },
-                onTapNaver: { onTapNaver?() },
-                onTapGoogle: { onTapGoogle?() }
+                onTapKakao: {
+                    // Kakao 버튼 클릭 액션
+                    store.send(.startSignUp)
+                },
+                onTapNaver: {
+                    // Naver 버튼 클릭 액션
+                    store.send(.startSignUp)
+                },
+                onTapGoogle: {
+                    // Google 버튼 클릭 액션
+                    store.send(.startSignUp)
+                }
             )
 
             Spacer().frame(height: 56)
@@ -45,10 +53,25 @@ struct OnboardFeatureView: View {
             // 4. 로그인 없이 시작하기
             ContinueWithoutLoginButton(
                 label: "또는 로그인 없이 시작하기",
-                action: { onTapContinueWithoutLogin?() }
+                action: {
+                    // 로그인 없이 시작하기 버튼 액션
+                    
+                }
             )
 
             Spacer(minLength: 0)
+        }
+    }
+}
+
+
+// MARK: Component
+fileprivate struct OnboardLayout<Content: View>: View {
+    @ViewBuilder let content: () -> Content
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            content()
         }
         .padding(.horizontal, 24)
         .padding(.top, 16)
@@ -58,8 +81,6 @@ struct OnboardFeatureView: View {
     }
 }
 
-
-// MARK: Component
 fileprivate struct OnboardLogo: View {
     var body: some View {
         Image("gusto_first_icon")
@@ -145,10 +166,5 @@ fileprivate struct ContinueWithoutLoginButton: View {
 
 // MARK: Preview
 #Preview {
-    OnboardFeatureView(
-        onTapKakao: { print("Kakao tapped") },
-        onTapNaver: { print("Naver tapped") },
-        onTapGoogle: { print("Google tapped") },
-        onTapContinueWithoutLogin: { print("Continue without login tapped") }
-    )
+    OnboardFeatureView()
 }

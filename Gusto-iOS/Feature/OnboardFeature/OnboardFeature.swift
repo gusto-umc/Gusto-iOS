@@ -36,11 +36,23 @@ struct OnboardFeature {
         Reduce { state, action in
             switch action {
             case .startSignUp:
-                state.path.append(.setNickname(.init()))
-                
+                // mutate
+                if state.path.isEmpty == true {
+                    state.path.append(.setNickname(.init()))
+                    return .none
+                } else {
+                    return .none
+                }
+            case .path(.element(id: _ , action: .setNickname(.delegate(.finished)))):
+                state.path.append(.setAge(.init()))
+                return .none
+            case .path(.element(id: _ , action: .setAge(.delegate(.finished)))):
+                state.path.append(.setGender(.init()))
+                return .none
+            case .path(.element(id: _ , action: .setGender(.delegate(.finished)))):
+                state.path.append(.setProfile(.init()))
                 return .none
             default:
-                
                 return .none
             }
         }
