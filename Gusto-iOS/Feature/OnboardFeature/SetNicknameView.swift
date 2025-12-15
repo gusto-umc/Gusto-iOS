@@ -5,19 +5,15 @@
 //  Created by 김민우 on 11/22/25.
 //
 import SwiftUI
+import ComposableArchitecture
+import OSLog
 
 
 
 // MARK: View
 struct SetNicknameView: View {
     // MARK: model
-    @State private var nickname: String = ""
-    var isNicknameTaken: Bool {
-        return nickname == "김철수"
-    }
-    var isValid: Bool {
-        return !nickname.isEmpty && !isNicknameTaken
-    }
+    @Bindable var store: StoreOf<SetNicknameFeature> = Store(initialState: SetNicknameFeature.State()) { SetNicknameFeature() }
     
     
     // MARK: body
@@ -45,9 +41,11 @@ struct SetNicknameView: View {
             // 4. 닉네임 입력 필드
             NicknameTextField(
                 prompt: "용맹한 파스타 21",
-                nickname: $nickname,
-                isValid: isValid,
-                isNicknameTaken: isNicknameTaken
+                store: store,
+                onChange: { newNickname in
+                    store.send(.setNickname(newNickname))
+                    store.send(.validateInput)
+                }
             )
             
             Spacer()
@@ -55,7 +53,7 @@ struct SetNicknameView: View {
             // 5. 하단 버튼
             SubmitButton(
                 label: "다음으로 넘어가기",
-                isValid: isValid,
+                isValid: store.isNicknameValid,
                 action: {
                     print("다음으로 넘어가기")
                 })
@@ -119,10 +117,12 @@ fileprivate struct MainTitle: View {
 }
 
 fileprivate struct NicknameTextField: View {
+    private let logger = Logger()
     let prompt: String
-    @Binding var nickname: String
-    let isValid: Bool
-    let isNicknameTaken: Bool
+    let store: StoreOf<SetNicknameFeature>
+    let onChange: (String) -> Void
+    
+    @State private var nickname: String = ""
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -132,13 +132,13 @@ fileprivate struct NicknameTextField: View {
                     .padding(.horizontal, 16)
                     // 글자수 제한 로직
                     .onChange(of: nickname, initial: false) { _, newValue in
-                        if newValue.count > 13 {
-                            nickname = String(newValue.prefix(13))
-                        }
+                        onChange(newValue)
+                        
+                        self.nickname = store.nicknameInput
                     }
                 
                 // 오른쪽 체크마크 (유효할 때만 표시)
-                if isValid {
+                if store.isNicknameValid {
                     Image(systemName: "checkmark")
                         .foregroundColor(pointColor)
                         .padding(.trailing, 16)
@@ -153,9 +153,9 @@ fileprivate struct NicknameTextField: View {
             // 하단 안내 메시지 및 카운터
             HStack {
                 if !nickname.isEmpty {
-                    Text(isNicknameTaken ? "이미 사용중인 닉네임입니다." : "사용 가능한 닉네임입니다.")
+                    Text(store.isNicknameTaken ? "이미 사용중인 닉네임입니다." : "사용 가능한 닉네임입니다.")
                         .font(.system(size: 12))
-                        .foregroundColor(isNicknameTaken ? warningColor : pointColor)
+                        .foregroundColor(store.isNicknameTaken ? warningColor : pointColor)
                 } else {
                     // 텍스트가 비었을 때 플레이스홀더처럼 보일 문구가 필요하다면 여기에 작성
                     Text(" ")

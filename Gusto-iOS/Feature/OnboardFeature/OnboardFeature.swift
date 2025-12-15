@@ -48,4 +48,24 @@ struct OnboardFeature {
     
     
     // MARK: value
+    enum Step: Int, Sendable, Hashable, CaseIterable {
+        // MARK: core
+        case setNickname = 1
+        case setAge = 2
+        case setGender = 3
+        case setProfile = 4
+        
+        // MARK: operator
+        var description: String {
+            return "step \(self.rawValue)"
+        }
+        
+        var totalCount: Int {
+            return Self.allCases.count
+        }
+        
+        var number: Int {
+            return self.rawValue
+        }
+    }
 }
