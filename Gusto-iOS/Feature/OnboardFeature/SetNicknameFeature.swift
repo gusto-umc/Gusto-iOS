@@ -8,3 +8,26 @@ import ComposableArchitecture
 
 
 // MARK: Feature
+@Reducer
+struct SetNicknameFeature {
+    // MARK: state
+    @ObservableState
+    struct State {
+        
+    }
+    
+    
+    // MARK: action
+    enum Action {
+        
+    }
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            return .none
+        }
+    }
+    
+    
+    // MARK: value
+}
