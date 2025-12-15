@@ -31,6 +31,12 @@ struct SetNicknameFeature {
         case setNickname(String)
         
         case validateInput
+        case submit
+        
+        case delegate(Delegate)
+        enum Delegate: String {
+            case finished
+        }
     }
     
     var body: some Reducer<State, Action> {
@@ -62,7 +68,13 @@ struct SetNicknameFeature {
                 state.isNicknameTaken = isNicknameTaken
                 state.isNicknameValid = isValid
                 return .none
+            case .submit:
+                fatalError("구현 예정입니다.")
+                return .none
                 
+            case .delegate(let action):
+                logger.debug("action: \(action.rawValue) 이 호출되었습니다.")
+                return .none
             default:
                 logger.error("처리되지 않은 Action이 호출되었습니다.")
                 return .none
