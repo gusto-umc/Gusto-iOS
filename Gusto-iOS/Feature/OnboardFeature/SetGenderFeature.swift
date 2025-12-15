@@ -13,18 +13,26 @@ struct SetGenderFeature {
     // MARK: state
     @ObservableState
     struct State {
-        
+        let step: OnboardFeature.Step  = .setGender
     }
     
     
     // MARK: action
     enum Action {
         
+        
+        case delegate(Delegate)
+        enum Delegate {
+            case finished
+        }
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-            return .none
+            switch action {
+            case .delegate:
+                return .none
+            }
         }
     }
     
