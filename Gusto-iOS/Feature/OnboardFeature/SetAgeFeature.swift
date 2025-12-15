@@ -22,11 +22,12 @@ struct SetAgeFeature {
     
     // MARK: action
     enum Action {
+        case setAge(Age)
+        
         case validateInput
         case submit
         
         case delegate(Delegate)
-
         enum Delegate {
             case finished
         }
@@ -35,6 +36,10 @@ struct SetAgeFeature {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
+            case .setAge(let newAge):
+                // mutate
+                state.ageInput = newAge
+                return .none
             case .validateInput:
                 // capture
                 let age = state.ageInput
@@ -48,7 +53,6 @@ struct SetAgeFeature {
                 return .none
             case .submit:
                 fatalError("구현 예정입니다.")
-                return .none
             case .delegate:
                 return .none
             }
