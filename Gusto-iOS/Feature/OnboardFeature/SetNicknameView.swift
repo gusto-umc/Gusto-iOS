@@ -28,7 +28,7 @@ struct SetNicknameView: View {
             
             // 2. 단계 표시
             StepIndicator(
-                step: .one
+                step: store.step
             )
             
             // 3. 메인 타이틀
@@ -81,7 +81,7 @@ fileprivate struct TopBackButtonBar: View {
 }
 
 fileprivate struct StepIndicator: View {
-    let step: Step
+    let step: OnboardFeature.Step
     
     var body: some View {
         HStack(spacing: 6) {
@@ -91,16 +91,10 @@ fileprivate struct StepIndicator: View {
         }
         .padding(.bottom, 10)
         
-        Text(step.rawValue)
+        Text(step.description)
             .font(.system(size: 14))
             .foregroundColor(.gray)
             .padding(.bottom, 10)
-    }
-    
-    enum Step: String {
-        case one = "step 1"
-        case two = "step 2"
-        case three = "step 3"
     }
 }
 

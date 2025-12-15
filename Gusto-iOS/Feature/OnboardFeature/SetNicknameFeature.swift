@@ -18,6 +18,8 @@ struct SetNicknameFeature {
     // MARK: state
     @ObservableState
     struct State {
+        let step: OnboardFeature.Step = .setNickname
+        
         var nicknameInput: String = ""
         var isNicknameValid: Bool = false
         var isNicknameTaken: Bool = false
