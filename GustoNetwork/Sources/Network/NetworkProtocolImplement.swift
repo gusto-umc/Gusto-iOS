@@ -7,12 +7,6 @@ public final class NetworkProtocolImpl: NetworkClient {
     self.session = session
   }
   
-  public func request<T>(_ request: Requestable) async throws -> T {
-    let request = try request.makeRequest()
-    let (_, response) = try await session.data(for: request)
-    try validate(response)
-    return () as! T
-  }
   public func request<T>(_ request: Requestable) async throws -> T where T: Decodable {
     let request = try request.makeRequest()
     let (data, response) = try await session.data(for: request)
