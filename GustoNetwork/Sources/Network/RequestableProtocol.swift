@@ -25,7 +25,7 @@ extension Requestable {
     guard let url = URL(string: baseURL + self.path) else {
       throw NetworkError.invalidURL
     }
-    var urlRequest = URLRequest(url: URL(string: baseURL + self.path)!)
+    var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = self.method.rawValue
     self.headers?.forEach { urlRequest.addValue($1, forHTTPHeaderField: $0) }
     
