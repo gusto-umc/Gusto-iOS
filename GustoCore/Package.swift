@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "gusto-ios-core",
   platforms: [
-    .iOS(.v14)
+    .iOS(.v18)
   ],
   products: [
     .library(
@@ -14,14 +14,15 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.10.0"),
+    .package(name: "3rdParty", path: "../3rdParty"),
   ],
   targets: [
     .target(
       name: "GustoLogger",
       dependencies: [
-        .product(name: "Dependencies", package: "swift-dependencies"),
-      ]
+        .product(name: "PFDependencies", package: "3rdParty"),
+      ],
+      path: "Sources/Core/GustoLogger"
     ),
     
   ]
