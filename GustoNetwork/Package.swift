@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "gusto-ios-network",
   platforms: [
-    .iOS(.v16)
+    .iOS(.v18)
   ],
   products: [
     .library(
@@ -13,10 +13,16 @@ let package = Package(
       targets: ["GustoNetwork"]
     ),
   ],
+  dependencies: [
+    .package(name: "3rdParty", path: "../3rdParty"),
+  ],
   targets: [
     .target(
-      name: "GustoNetwork"
+      name: "GustoNetwork",
+      dependencies: [
+        .product(name: "PFDependencies", package: "3rdParty"),
+      ],
+      path: "Sources/Network"
     ),
-    
   ]
 )
