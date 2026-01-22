@@ -1,0 +1,89 @@
+//
+//  SetNicknameFeature.swift
+//  Gusto-iOS
+//
+//  Created by 김민우 on 12/14/25.
+//
+import ComposableArchitecture
+import OSLog
+
+
+// MARK: Feature
+@Reducer
+struct SetNicknameFeature {
+    // MARK: core
+    private let logger = Logger()
+    
+    
+    // MARK: state
+    @ObservableState
+    struct State {
+        let step: OnboardFeature.Step = .setNickname
+        
+        var nicknameInput: String = ""
+        var isValid: Bool = false
+        var isNicknameTaken: Bool = false
+    }
+    
+    
+    // MARK: action
+    enum Action {
+        case setNickname(String)
+        
+        case validateInput
+        case submit
+        
+        case delegate(Delegate)
+        enum Delegate {
+            case finished(String)
+        }
+    }
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .setNickname(let nickname):
+                // mutate
+                if nickname.count > 13 {
+                    let prefixedValue = String(nickname.prefix(13))
+                    
+                    state.nicknameInput = prefixedValue
+                } else {
+                    state.nicknameInput = nickname
+                }
+                
+                return .none
+                
+            case .validateInput:
+                // capture
+                let nickname = state.nicknameInput
+                
+                // process
+                let isNicknameEmpty = nickname.isEmpty
+                let isNicknameTaken = (nickname == "김철수")
+                
+                let isValid = !isNicknameEmpty && !isNicknameTaken
+                
+                // mutate
+                state.isNicknameTaken = isNicknameTaken
+                state.isValid = isValid
+                return .none
+            case .submit:
+                // capture
+                let userName = state.nicknameInput
+                
+                // mutate
+                if state.isValid {
+                    return .send(.delegate(.finished(userName)))
+                } else {
+                    return .none
+                }
+            case .delegate:
+                return .none
+            }
+        }
+    }
+    
+    
+    // MARK: value
+}
