@@ -12,6 +12,10 @@ let package = Package(
       name: "GustoNetwork",
       targets: ["GustoNetwork"]
     ),
+    .library(
+      name: "ReviewEndpoints",
+      targets: ["ReviewEndpoints"]
+    )
   ],
   dependencies: [
     .package(name: "3rdParty", path: "../3rdParty"),
@@ -24,5 +28,9 @@ let package = Package(
       ],
       path: "Sources/Network"
     ),
+    .target(
+      name: "ReviewEndpoints",
+      path: "Sources/ReviewEndpoints"
+    )
   ]
 )
